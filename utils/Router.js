@@ -21,7 +21,7 @@ class Router {
           this.pick(car, t);
         }
       }
-      if(t === 145000) return;
+      //if(t === 145000) return;
     }
   }
 
