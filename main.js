@@ -9,30 +9,20 @@ const sets = [
   './sets/e_high_bonus.in'
 ]
 
+const ridesParser = require('./utils/ridesParser');
+
+
 class SelfDrivingRidesAnalizer {
   constructor(filename) {
     this.rides = [];
     fs.readFileSync(filename)
       .toString()
       .split('\n')
-      .forEach((line, index) => {
+      .forEach((line, index, a) => {
         if(index === 0) {
           this.config = configParser(line.split(' '));
         } else {
-          const data = line.split(' ');
-          this.rides.push({
-            start: {
-              x: data[0],
-              y: data[1]
-            },
-            end: {
-              x: data[2],
-              y: data[3]
-            },
-            earliest: data[4],
-            latest:  data[5],
-            distance: pathCost(data[0], data[1], data[2], data[3])
-          });
+          this.rides.push(ridesParser(line.split(' ')));
         }
       });
   }
