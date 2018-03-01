@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "node main.js a && node main.js b && node main.js c && node main.js d && node main.js e"
   },
   "repository": "https://github.com/marcinlawnik/hashcode"
 }

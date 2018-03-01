@@ -28,7 +28,7 @@ class Router {
       let score = ride.distance;
 
 
-      if (t + costToStart <= ride.eariest) {
+      if (t + costToStart < ride.eariest) {
         score += this.bonus;
        }
 
@@ -36,8 +36,8 @@ class Router {
        const r = score;
        score /= endTime;
 
-       //console.log(best.score, score, best.score < score)
-      if( best.score < score ) {
+      //console.log(best.score, score, best.score < score)
+      if( this.deadline > t + endTime && best.score < score ) {
         //console.log('best')
         best.index = i;
         best.r = r;

@@ -1,5 +1,9 @@
 const fs = require('fs');
 const SelfDrivingRidesAnalizer = require('./analizer');
+const ridesParser = require('./utils/ridesParser');
+const Router = require('./utils/Router');
+const Car = require('./utils/Car');
+
 const sets = [
   './sets/a_example.in',
   './sets/b_should_be_easy.in',
@@ -7,30 +11,6 @@ const sets = [
   './sets/d_metropolis.in',
   './sets/e_high_bonus.in'
 ];
-
-const ridesParser = require('./utils/ridesParser');
-const Router = require('./utils/Router');
-const Car = require('./utils/Car');
-
-class SelfDrivingRidesAnalizer {
-  constructor(filename) {
-    this.filename = filename.split('/')[2].split('.')[0]+'.out';
-    this.rides = [];
-    fs.readFileSync(filename)
-      .toString()
-      .split('\n')
-      .forEach((line, index, a) => {
-        if(index === 0) {
-          this.config = configParser(line.split(' '));
-        } else if(index < a.length - 1) {
-          this.rides.push(ridesParser(line.split(' ')));
-        }
-      });
-    for(let i = 0; i < this.config.vehicles; i += 1) {
-      new Car();
-    }
-  }
-}
 
 const analizers = [];
 
@@ -57,10 +37,15 @@ if(process.argv.length == 2) {
 analizers.forEach(analizer => {
   const router = new Router(analizer.rides, analizer.config.numberOfSteps, +analizer.config.bonus);
   router.route();
-  // Car.all().forEach((car) => console.log(car.score))
+  
+  //Car.all().forEach((car) => console.log(car.score));
+
   const score = Car.all().reduce((a,c) => {
     return a + c.score;
   }, 0);
+
+  console.log(`${analizer.filename} = ${score}`);
+  
   let text = "";
   Car.all().forEach((car) => {
     text += `${car.rides.length} ` + car.rides.join(' ') + '\n';
