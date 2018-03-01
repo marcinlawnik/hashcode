@@ -19,14 +19,13 @@ class Router {
   }
 
   pick(car, t) {
-    let best = { r: 0, index: 0, score: 0 }
+    let best = { r: 0, index: -1, score: 0 }
     //console.log(this.rides)
     if(this.rides.length <= 0) return;
     this.rides.forEach((ride, i) => {
       const costToStart = pathCost(car.x, car.y, ride.start.x, ride.start.y);
       const wholeCost = costToStart + ride.distance;
       let score = ride.distance;
-
 
       if (t + costToStart < ride.eariest) {
         score += this.bonus;
@@ -46,6 +45,8 @@ class Router {
         //console.log(best)
       }
     });
+
+    if(best.index === -1) return;
     
     const ride = this.rides[best.index];
     car.x = ride.end.x;
