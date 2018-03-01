@@ -1,13 +1,12 @@
 const fs = require('fs');
-const configParser = require('./utils/configParser');
-const pathCost = require('./utils/pathCost');
+const SelfDrivingRidesAnalizer = require('./analizer');
 const sets = [
   './sets/a_example.in',
   './sets/b_should_be_easy.in',
   './sets/c_no_hurry.in',
   './sets/d_metropolis.in',
   './sets/e_high_bonus.in'
-]
+];
 
 const ridesParser = require('./utils/ridesParser');
 const Router = require('./utils/Router');
