@@ -1,5 +1,6 @@
 const fs = require('fs');
 const configParser = require('./utils/configParser');
+const pathCost = require('./utils/pathCost');
 
 class SelfDrivingRidesAnalizer {
   constructor(filename) {
@@ -21,8 +22,9 @@ class SelfDrivingRidesAnalizer {
               x: data[2],
               y: data[3]
             },
-            eariest: data[4],
-            latest:  data[5]
+            earliest: data[4],
+            latest:  data[5],
+            distance: pathCost(data[0], data[1], data[2], data[3])
           });
         }
       });
