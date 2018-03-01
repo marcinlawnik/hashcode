@@ -1,4 +1,6 @@
 const fs = require('fs');
+const configParser = require('./utils/configParser');
+const pathCost = require('./utils/pathCost');
 
 class SelfDrivingRidesAnalizer {
   constructor(filename) {
@@ -8,8 +10,8 @@ class SelfDrivingRidesAnalizer {
       .split('\n')
       .forEach((line, index, a) => {
         if(index === 0) {
-          this.config = line.split(' ');
-        } else if(index != a.length - 1) {
+          this.config = configParser(line.split(' '));
+        } else {
           const data = line.split(' ');
           const ride = {
             start: {
