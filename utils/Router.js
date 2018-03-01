@@ -21,13 +21,15 @@ class Router {
           this.pick(car, t);
         }
       }
-      //if(t === 145000) return;
+      if(t === 145000) return;
     }
   }
 
   pick(car, t) {
     let best = { r: 0, index: -1, score: 0 }
     //console.log(this.rides)
+    const scores = [];
+
     if(this.rides.length <= 0) return;
     this.rides.forEach((ride, i) => {
       const costToStart = pathCost(car.x, car.y, ride.start.x, ride.start.y);
@@ -40,19 +42,19 @@ class Router {
 
        const endTime = Math.max(wholeCost, ride.eariest + ride.distance);
        const r = score;
-       score /= endTime;
+       score /= endTime;//endTime;
 
-       score = ride.distance;
 
       //console.log(best.score, score, best.score < score)
-      if( this.deadline > t + endTime && best.score < score ) {
+      //if( this.deadline > t + endTime && best.score < score ) {
         //console.log('best')
         best.index = i;
         best.r = r;
         best.score = ride.distance + this.bonus;
         best.endTime = endTime;
         //console.log(best)
-      }
+      //}
+      scores.push(best)
     });
 
     if(best.index === -1) return;
