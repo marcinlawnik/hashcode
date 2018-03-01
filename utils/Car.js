@@ -1,4 +1,4 @@
-const allCars = [];
+let allCars = [];
 let id = 0;
 
 class Car {
@@ -8,11 +8,18 @@ class Car {
     });
   };
 
+  static clear() {
+    allCars = [];
+  }
+
   constructor() {
     this.id = id++;
     this.x = 0;
     this.y = 0;
     this.time = 0;
+    this.score = 0;
+    this.count = 0;
+    this.rides = [];
     allCars.push(this);
   }  
 }

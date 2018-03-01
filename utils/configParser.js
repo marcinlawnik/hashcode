@@ -1,11 +1,11 @@
 const configParser = (config) => {
     let obj = {
-        rows: config[0],
-        columns: config[1],
-        vehicles: config[2],
-        numberOfRides: config[3],
-        bonus: config[4],
-        numberOfSteps: config[5]
+        rows: parseInt(config[0]),
+        columns: parseInt(config[1]),
+        vehicles: parseInt(config[2]),
+        numberOfRides: parseInt(config[3]),
+        bonus: parseInt(config[4]),
+        numberOfSteps: parseInt(config[5])
     }
     return obj;
   };
