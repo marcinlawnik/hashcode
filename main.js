@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+const SelfDrivingRidesAnalizer = require('./analizer');
 const sets = [
   './sets/a_example.in',
   './sets/b_should_be_easy.in',

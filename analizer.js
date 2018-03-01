@@ -1,5 +1,6 @@
 const ridesParser = require('./utils/ridesParser');
 const configParser = require('./utils/configParser');
+const fs = require('fs');
 class SelfDrivingRidesAnalizer {
   constructor(filename) {
     this.rides = [];
@@ -15,3 +16,5 @@ class SelfDrivingRidesAnalizer {
       });
   }
 }
+
+module.exports = SelfDrivingRidesAnalizer;
