@@ -21,7 +21,7 @@ class Router {
           this.pick(car, t);
         }
       }
-      if(t === 146000) return;
+      if(t === 144000) return;
     }
   }
 
@@ -35,7 +35,7 @@ class Router {
       let score = ride.distance;
 
       if (t + costToStart < ride.eariest) {
-        score += this.bonus * 2;
+        score += this.bonus;
        }
 
        const endTime = Math.max(wholeCost, ride.eariest + ride.distance);
@@ -43,7 +43,7 @@ class Router {
        score /= endTime;
 
       //console.log(best.score, score, best.score < score)
-      if( this.deadline > t + endTime && best.score < score ) {
+      if( this.deadline > t + endTime && best.score < score + this.bonus *3 ) {
         //console.log('best')
         best.index = i;
         best.r = r;
