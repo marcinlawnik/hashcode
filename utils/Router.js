@@ -1,6 +1,8 @@
 const Car = require('../utils/Car');
 const pathCost = require('../utils/pathCost');
 
+let f = false;
+
 class Router {
   constructor(rides, deadline, bonus) {
     this.rides = rides;
@@ -10,11 +12,16 @@ class Router {
 
   route() {
     for (let t = 0; t < this.deadline; t++) {
+      if(!(t % 10000)){
+        console.log(this.rides.length, t);
+      }
+      f = 0;
       for (let car of Car.all()) {
         if (car.time <= t) {
           this.pick(car, t);
         }
       }
+      if(t === 146000) return;
     }
   }
 
@@ -28,7 +35,7 @@ class Router {
       let score = ride.distance;
 
       if (t + costToStart < ride.eariest) {
-        score += this.bonus;
+        score += this.bonus * 2;
        }
 
        const endTime = Math.max(wholeCost, ride.eariest + ride.distance);
