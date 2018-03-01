@@ -6,12 +6,12 @@ class SelfDrivingRidesAnalizer {
     fs.readFileSync(filename)
       .toString()
       .split('\n')
-      .forEach((line, index) => {
+      .forEach((line, index, a) => {
         if(index === 0) {
           this.config = line.split(' ');
-        } else {
+        } else if(index != a.length - 1) {
           const data = line.split(' ');
-          this.rides.push({
+          const ride = {
             start: {
               x: data[0],
               y: data[1]
@@ -21,8 +21,10 @@ class SelfDrivingRidesAnalizer {
               y: data[3]
             },
             eariest: data[4],
-            latest:  data[5]
-          });
+            latest:  data[5],
+          };
+          ride.distance = require('./utils/pathCost')(ride.start.x, ride.start.y, ride.end.x, ride.end.y);
+          this.rides.push(ride);
         }
       });
   }
